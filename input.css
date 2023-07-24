@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media screen and (min-width: 767px) {
+    .ThreadDataCont {
+        height: 71%;
+    }
+}
+
+@media screen and (min-width: 1339px) {
+    .ThreadDataCont {
+        height: 79.6%;
+    }
+}
