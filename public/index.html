@@ -1,34 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>ExpressVariableBased-CrudApp</title>
-  <link href="./output.css" rel="stylesheet">
-  <style>
-    .modal {
-      transition: opacity 0.3s ease-in-out;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Post with Add Button</title>
+  <!-- Link to Tailwind CSS stylesheet -->
+<link rel="stylesheet" href="./output.css">
+<style>
+  .modal {
+    transition: opacity 0.3s ease-in-out;
+  }
 
-    .modal-container {
-      transition: transform 0.3s ease-in-out;
-    }
+  .modal-container {
+    transition: transform 0.3s ease-in-out;
+  }
 
-    .modal-open {
-      opacity: 1;
-    }
+  .modal-open {
+    opacity: 1;
+  }
 
-    .modal-container-open {
-      transform: translate(0, 0);
-    }
+  .modal-container-open {
+    transform: translate(0, 0);
+  }
 
-    /* .card {
-        height: 49%;
-        width: 32.5%;
-    } */
-  </style>
+  /* .card {
+      height: 49%;
+      width: 32.5%;
+  } */
+</style>
 </head>
-
-<body>
+<body class="bg-gray-100">
+  <div class="max-w-3xl mx-auto p-4">
+    <!-- Post Container -->
+    <div class="bg-white rounded-md shadow-md p-4 mb-4">
+        <div class="text-2xl font-bold mb-4">
+            <h1>Dummy Post Layout</h1>
+        </div>
+      <!-- Post Content -->
+      <div class="text-gray-800 text-lg mb-4">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et mollis sapien. Nullam auctor semper dolor nec
+          bibendum. Nullam sit amet varius nisi.</p>
+      </div>
+      <!-- Post Actions (e.g., Like, Share, etc.) -->
+      <div class="flex items-center justify-between">
+        <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+          Update
+        </button>
+        <button class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
+          Delete
+        </button>
+      </div>
+    </div>
+    <!-- Add Post Button -->
+    <button id="openModal" class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded w-full sm:w-auto">
+      Add New Post
+    </button>
+  </div>
   <div id="createPollModal"
     class="modal createPollModel fixed w-full border-2 border-yellow-600 h-full top-0 left-0 flex items-center justify-center opacity-0 hidden">
     <div class="createPoll-modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
@@ -48,17 +76,17 @@
         <div class="ThreadDataCont flex px-6 h-4/6  ">
           <div class="flex flex-col space-y-2 w-full">
             <div class="relative">
-              <input type="text" name="" id="threadTitle" required
+              <input id="postTitle" type="text" name=""  required
                 class="w-full p-2 text-white transition-colors peer bg-[#ffcc01] outline-none border-2 duration-500"
                 autocomplete="off">
-              <label for="pollTitle"
+              <label  for="postTitle"
                 class="absolute peer-focus:text-xs bottom-[0.6rem] left-3 text-white font-semibold peer-focus:bg-[#ffcc01] peer-focus:transform peer-focus:-translate-y-6 peer-focus:pl-1 peer-focus:pr-1 duration-500 transition-all">Thread
                 Title</label>
             </div>
             <div class="relative h-full">
               <textarea id="textArea"
                 class="shadow appearance-none peer duration-500 bg-[#ffcc01] border-2 h-full resize-none rounded w-full p-2 text-white leading-tight focus:outline-none focus:shadow-outline "></textarea>
-              <label for="pollOption1"
+              <label for="textArea"
                 class="absolute peer-focus:text-xs top-1 left-3 text-white font-semibold peer-focus:bg-[#ffcc01] peer-focus:transform peer-focus:-translate-y-3 peer-focus:pl-1 peer-focus:pr-1 duration-500 transition-all">Enter
                 text here!</label>
             </div>
@@ -72,15 +100,7 @@
       </div>
     </div>
   </div>
-  <div class="bg-white max-w-xl mx-auto p-4 shadow-md">
-    <h2 class="text-2xl font-bold mb-4">Post Title</h2>
-    <p class="text-gray-800">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec malesuada
-      mauris eget metus tristique interdum. Etiam ac nisi nec quam euismod viverra eu in est. Aenean nec neque dolor.
-      Sed id purus bibendum, congue nulla vel, condimentum arcu. Vestibulum id tellus sed metus tempus tincidunt.</p>
-    <button class="bg-blue-500 " id="openModal">Add Post</button>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script type="module" src="index.mjs"></script>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="module" src="index.mjs"></script>
 </html>

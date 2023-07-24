@@ -14,7 +14,8 @@ router.post('/post', (req, res, next) => {
     console.log('This is create post request', new Date());
 
     if (
-        (req.body.title.trim().length == 0) || (req.body.text.trim().length == 0)
+        ( !req.body.title
+            || !req.body.text)
     ) {
         res.status(403);
         res.send(`required parameters missing, 
