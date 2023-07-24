@@ -8,6 +8,8 @@ const __dirname = path.resolve();
 import V1Route from './versions/ApiV1/apiv1.mjs'
 import V2Route from './versions/ApiV2/apiv2.mjs'
 
+app.use(express.json())
+
 app.use('/api/v1',V1Route)
 app.use('/api/v2',V2Route)
 
