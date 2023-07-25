@@ -2,7 +2,9 @@
 module.exports = {
   content: ["./public/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      //'valid': ['peer-valid:transform', 'peer-valid:-translate-y-6', 'peer-valid:pl-1', 'peer-valid:pr-1' , 'peer-valid:bg-[#ffcc01]'],
+    },
   },
   plugins: [],
 }

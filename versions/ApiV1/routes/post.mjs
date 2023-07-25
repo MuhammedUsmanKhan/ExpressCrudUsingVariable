@@ -78,8 +78,8 @@ router.put('/post/update/:postId', (req, res, next) => {
 
         if (req.params.postId == item.id) {
             flag = false
-            item.title = item.title + ` ` + req.body.title
-            item.text = item.text + ` ` + req.body.text
+            item.title = req.body.title
+            item.text = req.body.text
             res.send("Post Updated Succesfully")
             return;
         }
@@ -97,7 +97,7 @@ router.delete('/post/delete/:postId', (req, res, next) => {
     posts.forEach((item,index) => {
         if (req.params.postId == item.id) {
             //   flag = false
-            posts.splice(1,index)
+            posts.splice(index,1)
             res.send("Post Deleted Succesfully")
             return;
         }
