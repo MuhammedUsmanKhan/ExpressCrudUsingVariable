@@ -2,7 +2,7 @@
   "name": "expressserverversionsapp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.mjs",
+  "main": "server.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "devCss": "npx tailwindcss -i input.css -o ./public/output.css --watch",
