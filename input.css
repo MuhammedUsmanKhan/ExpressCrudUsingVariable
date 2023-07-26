@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @media screen and (min-width: 767px) {
-    .ThreadDataCont {
-        height: 71%;
+    .createPoll-modal-container {
+        height: 94%;
     }
 }
 
@@ -12,4 +12,21 @@
     .ThreadDataCont {
         height: 79.6%;
     }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: white;
+    border-radius: 5px;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #5d368f;
+    border-radius: 5px;
 }

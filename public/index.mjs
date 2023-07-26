@@ -2,9 +2,13 @@ const addpollBut = document.querySelector('#openModal');
 const modal = document.getElementById('createPollModal');
 const closeModal = modal.getElementsByClassName('createPoll-modal-close')[0];
 const closeModalbut = modal.getElementsByClassName('createPoll-modal-close')[1];
+const closeModalUpdtbut = modal.getElementsByClassName('createPoll-modal-close')[2];
 const modalContainer = modal.getElementsByClassName('createPoll-modal-container')[0];
 const modalOverlay = modal.getElementsByClassName('createPoll-modal-overlay')[0];
-
+const errorDisplayModal = document.getElementById('myModal');
+const errorcloseModal = errorDisplayModal.getElementsByClassName('error-modal-close')[0];
+const errormodalContainer = errorDisplayModal.getElementsByClassName('error-modal-container')[0];
+const errormodalOverlay = errorDisplayModal.getElementsByClassName('error-modal-overlay')[0];
 addpollBut.addEventListener('click', () => {
 
   let postTitle = document.getElementById(`postTitle`)
@@ -14,7 +18,7 @@ addpollBut.addEventListener('click', () => {
 
   let addPostBut = document.getElementById(`pollCreatedBut`)
   let updtPostBut = document.getElementById(`postCreatedBut`)
-  
+
   if (addPostBut.classList.contains(`hidden`)) {
     addPostBut.classList.remove(`hidden`)
     updtPostBut.classList.add(`hidden`)
@@ -40,6 +44,13 @@ closeModalbut.addEventListener('click', () => {
     modal.classList.add('hidden');
   }, 300);
 });
+closeModalUpdtbut.addEventListener('click', () => {
+  modal.classList.remove('modal-open');
+  modalContainer.classList.remove('modal-container-open');
+  setTimeout(() => {
+    modal.classList.add('hidden');
+  }, 300);
+});
 modalOverlay.addEventListener('click', () => {
   modal.classList.remove('modal-open');
   modalContainer.classList.remove('modal-container-open');
@@ -47,6 +58,66 @@ modalOverlay.addEventListener('click', () => {
     modal.classList.add('hidden');
   }, 300);
 });
+
+let openModal = (error) => {
+  const modalText = document.getElementById(`Response`);
+  modalText.innerText = `${error.response.data}`
+  console.log(modalText.innerText)
+  //console.log(error.data)
+  errorDisplayModal.classList.remove('hidden');
+  setTimeout(() => {
+    errorDisplayModal.classList.add('modal-open');
+    errormodalContainer.classList.add('modal-container-open');
+  }, 50);
+}
+let succesOpenModal = (succes) => {
+  const modalHeader = document.getElementById(`modalHeader`)
+  const modalText = document.getElementById(`Response`);
+  modalHeader.innerText = `Request Confirmed`
+  modalText.innerText = `${succes.data}`
+  console.log(modalText.innerText)
+  //console.log(error.data)
+  errorDisplayModal.classList.remove('hidden');
+  setTimeout(() => {
+    errorDisplayModal.classList.add('modal-open');
+    errormodalContainer.classList.add('modal-container-open');
+  }, 50);
+}
+let errorModel = () => {
+  errorcloseModal.addEventListener('click', (event) => {
+    event.preventDefault()
+    errorDisplayModal.classList.remove('modal-open');
+    errormodalContainer.classList.remove('modal-container-open');
+    setTimeout(() => {
+      errorDisplayModal.classList.add('hidden');
+    }, 300);
+  });
+  errormodalOverlay.addEventListener('click', (event) => {
+    event.preventDefault()
+    errorDisplayModal.classList.remove('modal-open');
+    errormodalContainer.classList.remove('modal-container-open');
+    setTimeout(() => {
+      errorDisplayModal.classList.add('hidden');
+    }, 300);
+  });
+  errorcloseModal.addEventListener('click', (event) => {
+    event.preventDefault()
+    errorDisplayModal.classList.remove('modal-open');
+    errormodalContainer.classList.remove('modal-container-open');
+    setTimeout(() => {
+      errorDisplayModal.classList.add('hidden');
+    }, 300);
+  });
+  errormodalOverlay.addEventListener('click', (event) => {
+    event.preventDefault()
+    errorDisplayModal.classList.remove('modal-open');
+    errormodalContainer.classList.remove('modal-container-open');
+    setTimeout(() => {
+      errorDisplayModal.classList.add('hidden');
+    }, 300);
+  });
+
+}
 
 let modalOpen = (postidRef) => {
   modal.classList.remove('hidden');
@@ -72,11 +143,11 @@ let modalOpen = (postidRef) => {
     })
     .catch((error) => {
       console.log(error)
+      openModal(error)
+      errorModel()
+      //console.log(updateBut)
     })
-
-  //console.log(updateBut)
 }
-
 window.displayPost = () => {
 
   axios.get(`/api/v1/posts`)
@@ -184,18 +255,31 @@ let addPost = () => {
       console.log(response.data);
       //document.querySelector("#result").innerHTML = response.data;
       //getAllPost();
+      let successModalContainer = document.getElementsByClassName(`error-modal-container`)[0]
+      if (!successModalContainer.classList.contains(`bg-purple-700`)) {
+        successModalContainer.classList.add(`bg-purple-700`)
+      }
       postTitle.value = " "
       postDetails.value = " "
       postContainer.innerHTML = " "
+      succesOpenModal(response)
+      errorModel()
       displayPost();
     })
     .catch((error) => {
       // handle error
-      console.log(error.data);
-      //document.querySelector("#result").innerHTML = "error in post submission"
+      console.log(error.response.data);
+      let successModalContainer = document.getElementsByClassName(`error-modal-container`)[0]
+      if (!successModalContainer.classList.contains(`bg-purple-700`)) {
+        successModalContainer.classList.add(`bg-purple-700`)
+      }
+      openModal(error)
+      errorModel()
     })
-
 }
+//document.querySelector("#result").innerHTML = "error in post submission"
+
+
 let postCreateBut = document.getElementById(`pollCreatedBut`)
 postCreateBut.addEventListener(`click`, addPost)
 
@@ -206,16 +290,26 @@ let delFunc = (event) => {
   let postID = event.target.getAttribute('ref')
   axios.delete(`/api/v1/post/delete/${postID}`)
     .then((response) => {
-
+      let successModalContainer = document.getElementsByClassName(`error-modal-container`)[0]
+      if (!successModalContainer.classList.contains(`bg-green-700`)) {
+        successModalContainer.classList.add(`bg-green-700`)
+      }
+      //successModalContainer.classList.add(`bg-green-700`)
       let postContainer = document.getElementById(`postContainer`)
       postContainer.innerHTML = ''
       displayPost();
+      succesOpenModal(response)
+      errorModel()
 
     })
     .catch((err) => {
-
       console.log(err);
-
+      let successModalContainer = document.getElementsByClassName(`error-modal-container`)[0]
+      if (!successModalContainer.classList.contains(`bg-green-700`)) {
+        successModalContainer.classList.add(`bg-green-700`)
+      }
+      openModal(err)
+      errorModel()
     });
 
 }
@@ -224,8 +318,8 @@ const updtPostBut = document.querySelector('#postCreatedBut');
 
 let Update = (event) => {
 
-let postContainer = document.getElementById(`postContainer`)
-postContainer.innerHTML = ""
+  let postContainer = document.getElementById(`postContainer`)
+  postContainer.innerHTML = ""
   console.log(event.target);
   let theRef = event.target.attributes.ref.value;
 
@@ -238,12 +332,26 @@ postContainer.innerHTML = ""
   })
     .then((postData) => {
       console.log(postData)
+      let successModalContainer = document.getElementsByClassName(`error-modal-container`)[0]
+      if (!successModalContainer.classList.contains(`bg-indigo-700`)) {
+        successModalContainer.classList.add(`bg-indigo-700`)
+      }
+      succesOpenModal(postData)
+      errorModel()
       displayPost();
     })
     .catch((error) => {
       console.log(error)
+      if (!successModalContainer.classList.contains(`bg-indigo-700`)) {
+        successModalContainer.classList.add(`bg-indigo-700`)
+      }
+      openModal(error)
+      errorModel()
     })
 
 }
 
 updtPostBut.addEventListener(`click`, Update)
+
+
+
