@@ -342,6 +342,7 @@ let Update = (event) => {
     })
     .catch((error) => {
       console.log(error)
+      let successModalContainer = document.getElementsByClassName(`error-modal-container`)[0]
       if (!successModalContainer.classList.contains(`bg-indigo-700`)) {
         successModalContainer.classList.add(`bg-indigo-700`)
       }
